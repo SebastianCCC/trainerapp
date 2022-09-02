@@ -7,7 +7,7 @@ import Welcome from './Pages/Welcome'
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="home" element={<Home />} />
@@ -15,7 +15,7 @@ function App() {
         <Route path="schedule" element={<Schedule />} />
         <Route path="schedule/:id" element={<ClassDetail />} />
       </Routes>
-    </div>
+    </>
   )
 }
 
