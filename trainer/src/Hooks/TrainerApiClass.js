@@ -8,7 +8,7 @@ const TrainerApi = ({ id = '', method = 'GET' }) => {
   const callback = (body) => {
     axios({
       method,
-      url: `http://${process.env.REACT_APP_IP}/api/v1/classes/${id ? '/' + id : ''}`,
+      url: `http://${process.env.REACT_APP_IP}/api/v1/classes/${id ? id : ''}`,
       body: body || null,
     }).then((res) => {
       setClassData(res.data)
