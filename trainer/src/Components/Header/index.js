@@ -6,11 +6,14 @@ const NavTop = ({ title, displayTitle, toggle }) => {
       {displayTitle ? (
         <h1 className="text-3xl capitalize">{title}</h1>
       ) : (
-        <div className="text-secondary">
+        <div className={`${displayTitle ? 'text-secondary' : 'text-white'}`}>
           <ArrowLeftIcon />
         </div>
       )}
-      <div onClick={() => toggle(true)} className="text-secondary">
+      <div
+        onClick={() => toggle(true)}
+        className={`${displayTitle ? 'text-secondary' : 'text-white'}`}
+      >
         <MenuIcon />
       </div>
     </div>
