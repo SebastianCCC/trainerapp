@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, MenuIcon } from './Assets'
 
-const NavTop = ({ title, displayTitle }) => {
+const NavTop = ({ title, displayTitle, toggle }) => {
   return (
     <div className="flex justify-between items-center p-page">
       {displayTitle ? (
@@ -10,7 +10,7 @@ const NavTop = ({ title, displayTitle }) => {
           <ArrowLeftIcon />
         </div>
       )}
-      <div className="text-secondary">
+      <div onClick={() => toggle(true)} className="text-secondary">
         <MenuIcon />
       </div>
     </div>
