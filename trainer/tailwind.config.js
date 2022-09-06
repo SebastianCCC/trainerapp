@@ -13,7 +13,7 @@ module.exports = {
       '5xl': '56px',
     },
     extend: {
-      maxWidth: {
+      width: {
         mobile: '375px',
       },
       fontFamily: {

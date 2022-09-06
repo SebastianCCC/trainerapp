@@ -9,12 +9,12 @@ const Layout = ({ children }) => {
   const title = pathname.replace('/', '').replace('home', 'popular classes')
   const displayTitle = !title.includes('class/')
   return (
-    <div className="max-w-mobile">
-      <header className="sticky top-0 z-20">
+    <div className="w-mobile">
+      <header className="fixed w-mobile top-0 z-20">
         {showmenu && <Menu toggle={setShowMenu} />}
         {title && <NavTop title={title} displayTitle={displayTitle} toggle={setShowMenu} />}
       </header>
-      <main>{children}</main>
+      <main className={`${displayTitle && title && 'mt-12'}`}>{children}</main>
     </div>
   )
 }
