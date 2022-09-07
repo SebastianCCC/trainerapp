@@ -6,7 +6,7 @@ import Menu from './Header/Menu'
 const Layout = ({ children }) => {
   const [showmenu, setShowMenu] = useState(false)
   let { pathname } = useLocation()
-  const title = pathname.replace('/', '').replace('home', 'popular classes')
+  const title = pathname.replace('/', '').replace('-', ' ').replace('home', 'popular classes')
   const displayTitle = !title.includes('class/')
   return (
     <div className="w-mobile">

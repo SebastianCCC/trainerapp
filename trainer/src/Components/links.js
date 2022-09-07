@@ -9,7 +9,7 @@ export const Navlinks = [
   },
   {
     title: 'my schedule',
-    link: '/schedule',
+    link: '/my-schedule',
   },
   {
     title: 'log in',
