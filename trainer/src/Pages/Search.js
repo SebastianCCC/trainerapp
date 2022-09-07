@@ -27,7 +27,7 @@ const Search = () => {
   }
   return (
     <div className="p-page">
-      <form className="flex items-center pl-3 my-4 border border-ternary rounded-full w-full">
+      <form className="flex items-center pl-3 my-4 bg-additional border border-ternary rounded-full w-full">
         <div className="text-secondary">
           <SearchIcon />
         </div>

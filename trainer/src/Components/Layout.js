@@ -12,7 +12,9 @@ const Layout = ({ children }) => {
     <div className="w-mobile">
       <header className="fixed w-mobile top-0 z-20">
         {showmenu && <Menu toggle={setShowMenu} />}
-        {title && <NavTop title={title} displayTitle={displayTitle} toggle={setShowMenu} />}
+        {title && title !== 'signup' && (
+          <NavTop title={title} displayTitle={displayTitle} toggle={setShowMenu} />
+        )}
       </header>
       <main className={`${displayTitle && title && 'mt-12'}`}>{children}</main>
     </div>
