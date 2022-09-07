@@ -22,12 +22,12 @@ const Welcome = () => {
         <div className="grid grid-rows-1 relative" key={i}>
           {!link ? (
             <div className="flex flex-col justify-end row-start-1 row-end-2 col-span-full z-10">
-              <h1 className="text-primary font-bold text-5xl max-w-[25%] leading-none p-page">
+              <h1 className="text-primary font-bold text-5xl max-w-[25%] leading-none p-page px-11">
                 {title}
               </h1>
               <div className="pb-8 flex items-center">
                 <div className="w-[10%] h-[2px] bg-white"></div>
-                <p className="text-white font-semibold pl-2">{decs}</p>
+                <p className="text-white font-bold pl-2">{decs}</p>
               </div>
             </div>
           ) : (
