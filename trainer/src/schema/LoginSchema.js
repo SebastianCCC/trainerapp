@@ -6,6 +6,6 @@ export const schema = yup
       .string()
       .required('Your email is required')
       .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Email must be a valid email'),
-    password: yup.string().required('Your password is required').min(6, 'Password to short'),
+    password: yup.string().required('Your password is required').min(4, 'Password to short'),
   })
   .required()

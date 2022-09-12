@@ -1,8 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { schema } from '../schema/LoginSchema'
+import { useContext } from 'react'
+import { StateContext } from '../Hooks/StateContext'
 
 const SignUp = () => {
+  const { token, setToken } = useContext(StateContext)
+  console.log(token)
   const {
     register,
     handleSubmit,
