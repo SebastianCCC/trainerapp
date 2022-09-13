@@ -6,7 +6,7 @@ import { StateContext } from '../Util/StateContext'
 import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
-  const { setToken, setLoaded } = useContext(StateContext)
+  const { setToken, setLoaded, setUserId } = useContext(StateContext)
   const [err, setErr] = useState(null)
   let navigate = useNavigate()
   const {
@@ -31,6 +31,7 @@ const SignUp = () => {
       .then((data) => {
         setLoaded(false)
         setToken(data.token)
+        setUserId(data.userId)
         navigate('/home', { replace: true })
       })
       .catch(() => {
