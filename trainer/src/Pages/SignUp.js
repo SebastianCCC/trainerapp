@@ -1,8 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { schema } from '../schema/LoginSchema'
+import { useContext, useState } from 'react'
+import { StateContext } from '../Util/StateContext'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
+  const { setToken, setLoaded } = useContext(StateContext)
+  const [err, setErr] = useState(null)
+  let navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -13,8 +19,28 @@ const SignUp = () => {
   })
 
   const onSubmit = (data) => {
+    setLoaded(true)
+    fetch(`http://${process.env.REACT_APP_IP}/auth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLoaded(false)
+        setToken(data.token)
+        navigate('/home', { replace: true })
+      })
+      .catch(() => {
+        setLoaded(false)
+        setErr(true)
+        setTimeout(() => {
+          setErr(false)
+        }, 5000)
+      })
     reset()
-    console.log(data)
   }
   return (
     <>
@@ -32,14 +58,14 @@ const SignUp = () => {
           <label className="font-semibold pt-3">Log in with your credentials</label>
           <div
             className={`pl-5 my-4 bg-additional border ${
-              errors.email ? 'border-red-800' : 'border-ternary'
+              errors.username ? 'border-red-800' : 'border-ternary'
             } rounded-full w-full`}
           >
             <input
               className="placeholder:text-secondary w-full p-3 bg-transparent outline-none"
-              placeholder="Enter your email..."
+              placeholder="Enter your email or username..."
               type="text"
-              {...register('email')}
+              {...register('username')}
             />
           </div>
           <div
@@ -54,9 +80,11 @@ const SignUp = () => {
               {...register('password')}
             />
           </div>
-          {Boolean(Object.keys(errors).length) && (
+          {(Boolean(Object.keys(errors).length) || err) && (
             <p className="w-full select-none mb-4">
-              {errors.email?.message || errors.password?.message}
+              {errors.username?.message ||
+                errors.password?.message ||
+                (err && 'Wrong password or username')}
             </p>
           )}
           <button className="bg-primary py-[12px] px-8 w-full font-semibold text-base tracking-wide uppercase rounded-full">

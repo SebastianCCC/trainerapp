@@ -23,7 +23,6 @@ const Search = () => {
           singleClass.classDescription.toLocaleLowerCase().includes(searchValue)
       )
     )
-    console.log(filteredClass)
   }
   return (
     <div className="p-page">

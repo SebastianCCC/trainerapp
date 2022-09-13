@@ -14,7 +14,7 @@ module.exports = {
     },
     extend: {
       width: {
-        mobile: '375px',
+        mobile: '390px',
       },
       fontFamily: {
         poppins: "'Poppins', sans-serif",
