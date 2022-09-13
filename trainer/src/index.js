@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import Layout from './Components/Layout'
-import { StateProvider } from './Hooks/StateContext'
+import { StateProvider } from './Util/StateContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
