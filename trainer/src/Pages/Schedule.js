@@ -18,7 +18,7 @@ const Schedule = () => {
             )
           })
         ) : (
-          <p className="font-semibold">No classes to be found. Try signing up to class first.</p>
+          <p className="font-semibold">No classes to be found. Try signing up to a class first.</p>
         )}
       </section>
     </div>
