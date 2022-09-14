@@ -3,13 +3,31 @@ import { useParams } from 'react-router-dom'
 import TrainerApiTrainer from '../Hooks/TrainerApiTrainer'
 import TrainerCard from '../Components/Main/TrainerCard'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { StateContext } from '../Util/StateContext'
+import { useNavigate } from 'react-router-dom'
+import TrainerApiUser from '../Hooks/TrainerApiUser'
 
 const ClassDetail = () => {
+  const { token, userId } = useContext(StateContext)
   const { id } = useParams()
   const { classdata } = TrainerApi({ id })
   const { trainerdata } = TrainerApiTrainer({ id: classdata && classdata.trainer.id })
-  /*   console.log(classdata) */
-  /*   console.log(!Array.isArray(trainerdata) && trainerdata) */
+  const { userData } = TrainerApiUser({ id: userId, token })
+  const SignedUp = userData && userData.classes.some((classes) => classes.id == id)
+  let navigate = useNavigate()
+
+  const SignUpClass = () => {
+    fetch(`http://${process.env.REACT_APP_IP}/api/v1/users/${userId}/classes/${id}`, {
+      method: SignedUp ? 'DELETE' : 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    })
+      .then((response) => (SignedUp ? response.text() : response.json()))
+      .then(() => {
+        navigate('/my-schedule', { replace: true })
+      })
+      .catch(() => {})
+  }
   return (
     <>
       {classdata && (
@@ -35,11 +53,20 @@ const ClassDetail = () => {
             <p className="leading-tight pb-page">{classdata.classDescription}</p>
             <h2 className="text-2xl font-bold py-page">Trainer</h2>
             <TrainerCard title={classdata.trainer.trainerName} img={trainerdata?.asset?.url} />
-            <Link to="/signup">
-              <button className="bg-primary mt-[15px] py-[12px] px-8 w-full font-semibold text-base tracking-wide uppercase rounded-full">
-                sign up
+            {token ? (
+              <button
+                onClick={SignUpClass}
+                className="border-2 border-primary mt-[15px] py-[12px] px-8 w-full font-semibold text-base text-primary tracking-wide uppercase rounded-full"
+              >
+                {SignedUp ? 'cancel class appointment' : 'sign up for class'}
               </button>
-            </Link>
+            ) : (
+              <Link to="/signup">
+                <button className="bg-primary mt-[15px] py-[12px] px-8 w-full font-semibold text-base tracking-wide uppercase rounded-full">
+                  sign in
+                </button>
+              </Link>
+            )}
           </div>
         </>
       )}
