@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   return (
     <div className="w-mobile">
       {loaded && (
-        <div className="fixed flex flex-col justify-center items-center top-0 h-screen bg-additional/70 backdrop-blur-sm w-mobile text-primary">
+        <div className="fixed flex flex-col justify-center items-center top-0 h-screen bg-additional/70 backdrop-blur-[2px] w-mobile">
           <LoadingSpinner />
         </div>
       )}
