@@ -5,6 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import Layout from './Components/Layout'
 import { StateProvider } from './Util/StateContext'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -18,3 +19,5 @@ root.render(
     </StateProvider>
   </React.StrictMode>
 )
+
+serviceWorkerRegistration.register()
