@@ -14,9 +14,9 @@
     "react-hook-form": "^7.34.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11",
+    "react-use-pwa-install": "^0.2.1",
     "serve": "^14.0.1",
+    "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
@@ -28,7 +28,8 @@
     "workbox-range-requests": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "workbox-streams": "^6.5.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "serve -s build",
