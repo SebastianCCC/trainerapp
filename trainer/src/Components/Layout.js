@@ -4,6 +4,9 @@ import { LoadingSpinner } from '../Assets'
 import { StateContext } from '../Util/StateContext'
 import NavTop from './Header/index'
 import Menu from './Header/Menu'
+import { Detector } from 'react-detect-offline'
+import { OfflineIcon } from './Header/Assets'
+import { motion } from 'framer-motion'
 
 const Layout = ({ children }) => {
   const { loaded } = useContext(StateContext)
@@ -13,8 +16,28 @@ const Layout = ({ children }) => {
   const displayTitle = !title.includes('class/')
   return (
     <div className="w-mobile">
+      <Detector
+        render={({ online }) => (
+          <>
+            {!online && (
+              <motion.div
+                initial={{ opacity: 0, y: '-100vh' }}
+                animate={{ opacity: 1, y: 0 }}
+                className="pt-page absolute w-mobile z-30"
+              >
+                <div className="flex justify-center items-center bg-primary py-[12px] px-8 rounded-full w-[90%] m-auto">
+                  <OfflineIcon />
+                  <h2 className="font-semibold text-base tracking-wide uppercase text-center pl-4">
+                    Your offline
+                  </h2>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+      />
       {loaded && (
-        <div className="fixed flex flex-col justify-center items-center top-0 h-screen bg-additional/70 backdrop-blur-sm w-mobile text-primary">
+        <div className="fixed flex flex-col justify-center items-center top-0 h-screen bg-additional/70 backdrop-blur-[2px] w-mobile">
           <LoadingSpinner />
         </div>
       )}
