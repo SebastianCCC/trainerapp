@@ -5,6 +5,8 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import Layout from './Components/Layout'
 import { StateProvider } from './Util/StateContext'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+import { Online } from 'react-detect-offline'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -12,9 +14,13 @@ root.render(
     <StateProvider>
       <BrowserRouter>
         <Layout>
-          <App />
+          <Online>
+            <App />
+          </Online>
         </Layout>
       </BrowserRouter>
     </StateProvider>
   </React.StrictMode>
 )
+
+serviceWorkerRegistration.register()

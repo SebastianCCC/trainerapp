@@ -3,10 +3,12 @@ import { XIcon } from './Assets'
 import { useContext } from 'react'
 import { StateContext } from '../../Util/StateContext'
 import { useNavigate } from 'react-router-dom'
+import { usePWAInstall } from 'react-use-pwa-install'
 
 const Menu = ({ toggle }) => {
   const { token, setToken } = useContext(StateContext)
   let navigate = useNavigate()
+  const install = usePWAInstall()
 
   const Navlinks = [
     {
@@ -29,6 +31,12 @@ const Menu = ({ toggle }) => {
       link: '/signup',
       displayLink: true,
     },
+    {
+      title: 'install Trainer',
+      link: '#',
+      displayLink: token,
+      install,
+    },
   ]
   return (
     <div className="absolute w-full h-screen bg-white p-page">
@@ -39,24 +47,35 @@ const Menu = ({ toggle }) => {
       </div>
       <nav className="text-center">
         <ul>
-          {Navlinks.map(({ title, link, displayLink }, i) => {
+          {Navlinks.map(({ title, link, displayLink, install }, i) => {
             return (
               displayLink && (
                 <li key={i} className="text-2xl py-page capitalize">
-                  {title !== 'log out' ? (
-                    <Link onClick={() => toggle(false)} to={link}>
-                      {title}
-                    </Link>
-                  ) : (
+                  {install ? (
                     <button
-                      onClick={() => {
-                        setToken('')
-                        toggle(false)
-                        navigate('/signup', { replace: true })
-                      }}
+                      className="bg-primary py-[12px] px-8 font-semibold text-base tracking-wide uppercase rounded-full"
+                      onClick={() => install()}
                     >
                       {title}
                     </button>
+                  ) : (
+                    <>
+                      {title !== 'log out' ? (
+                        <Link onClick={() => toggle(false)} to={link}>
+                          {title}
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setToken('')
+                            toggle(false)
+                            navigate('/signup', { replace: true })
+                          }}
+                        >
+                          {title}
+                        </button>
+                      )}
+                    </>
                   )}
                 </li>
               )

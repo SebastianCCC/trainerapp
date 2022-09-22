@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom'
 import TrainerApiTrainer from '../Hooks/TrainerApiTrainer'
 import TrainerCard from '../Components/Main/TrainerCard'
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { StateContext } from '../Util/StateContext'
 import { useNavigate } from 'react-router-dom'
 import TrainerApiUser from '../Hooks/TrainerApiUser'
+import RatingModal from '../Components/Main/RatingModal'
 
 const ClassDetail = () => {
+  const [showRatingModal, setShowRatingModal] = useState(false)
   const { token, userId } = useContext(StateContext)
   const { id } = useParams()
   const { classdata } = TrainerApi({ id })
@@ -32,6 +34,12 @@ const ClassDetail = () => {
     <>
       {classdata && (
         <>
+          {token && showRatingModal && (
+            <RatingModal
+              title={`Rate the ${classdata.className} class`}
+              toggle={setShowRatingModal}
+            />
+          )}
           <div className="relative min-h-[400px]">
             <div className="absolute z-[10] w-full h-full bg-gradient-to-t from-[#00000080]"></div>
             <div className="absolute bottom-0 z-10 p-page w-full">
@@ -39,9 +47,14 @@ const ClassDetail = () => {
                 {classdata.className}
               </h1>
               <div className="flex justify-end pb-[22px] pt-page">
-                <button className="border-2 border-primary py-[10px] px-8 font-semibold tracking-wide uppercase text-primary rounded-full">
-                  rate
-                </button>
+                {token && (
+                  <button
+                    onClick={() => setShowRatingModal(true)}
+                    className="border-2 border-primary py-[10px] px-8 font-semibold tracking-wide uppercase text-primary rounded-full"
+                  >
+                    rate
+                  </button>
+                )}
               </div>
             </div>
             <img className="absolute w-full h-full object-cover" src={classdata.asset.url} />
